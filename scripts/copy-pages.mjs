@@ -10,5 +10,8 @@ if (!fs.existsSync(path.join(source, "index.html"))) {
 }
 fs.rmSync(destination, { recursive: true, force: true });
 fs.cpSync(source, destination, { recursive: true });
+for (const internalPath of ["api", "__manus__", "manus-routes.json", ".gitkeep"]) {
+  fs.rmSync(path.join(destination, internalPath), { recursive: true, force: true });
+}
 fs.writeFileSync(path.join(destination, ".nojekyll"), "", "utf8");
 console.log("Copied the static website to docs/ for GitHub Pages.");
